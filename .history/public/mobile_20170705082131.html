@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="euc-kr">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>스와이핑배너</title>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="css/m_app.css">
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="plugin/jquery.copy-to-clipboard.js"></script>
+
+
+	<link rel="stylesheet" href="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.css">	
+	<!--<script type="text/javascript" src="http://eventimg.auction.co.kr/md/auction/086A428A1C/jquery-1.11.3.min.js"></script>-->
+	<script src="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.js"></script>
+	
+	
+	<script src="js/m_app.js"></script>
+
+</head>
+
+<body>
+	
+	<!--팝업-->
+	<div id="popup">
+		<p class="pop_img_ok"><a href="javascript:;"><img src="images/searchBtn.gif" alt=""></a></p>
+		<input class="imgUrl" type="text" placeholder="이미지 URL을 입력해 주세요">
+		<div id="holder">
+			<div class="not_img_message">해당 링크의 정보를 불러올수 없습니다<br>링크를 다시 확인 해 주세요</div>
+
+		</div>
+		<input class="linkUrl" type="text" placeholder="클릭시 이동할 URL을 입력해 주세요" >
+
+		<span class="controlCase">
+			<a href="javascript:popup_info_check();"><img src="images/ok_btn.jpg" alt=""></a>
+			<a href="javascript:popup_close();"><img src="images/cancel_btn.jpg" alt=""></a>
+		</span>
+	</div>
+
+
+	<div id="wrapper">
+		<div id="header">
+			<div class="top">
+				<!--웹 , 모바일선택-->
+				<ul class="icon">
+					<li><a href="javascript:;"><img src="images/desktop_icon.png" alt="pc"></a></li>
+					<li class="select"><a href="javascript:;"><img src="images/mobile_icon.png" alt="mobile"></a></li>
+				</ul>
+				<!--다운로드 소스보기-->
+				<p class="right">
+					<a class="downBtn" href="#">파일받기</a>
+					<a class="viewBtn" href="#">소스보기</a>
+				</p>
+				
+			</div>
+			<div class="top_side">
+				<!--템플릿 보기-->
+				<p class="right">
+					<a href="#">템플릿</a>
+				</p>
+			</div>
+		</div>
+		
+		
+		
+		<div id="mobileViewArea">
+			<div id="p_wrapper_slide">
+				
+					<!--loop-->
+
+
+
+			</div>
+		</div>
+		
+		
+		<div id="clipArea">
+			
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<!--하단메뉴-->
+		<div id="aside">
+			<div id="resultArea">
+				<textarea name="" id="" cols="30" rows="10"></textarea>
+			</div>
+			<div class="inc-obj">
+				<ul id="sortable">
+
+					<!--<li class="ui-state-default btn">
+						<a class="closeBtn" href=""><img src="images/close_btn.png" /></a>
+						<a href="javascript:;"><img src="images/plus_btn.jpg" /></a>
+					</li>
+					-->
+				</ul>
+				<span class="new_btn">
+					<a class="addBtn" href="javascript:;"><img src="images/plus_btn.jpg" /></a>
+				</span>
+			</div>
+		
+		</div>
+		<!--하단메뉴 끝-->
+		
+	</div>
+	
+	
+	
+	
+
+</body>
+
+</html>
