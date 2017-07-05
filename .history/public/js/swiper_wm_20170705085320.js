@@ -136,7 +136,63 @@ $(document).ready(function () {
 		//alert('검색')
 		imageCheck();
 	});
-	
+
+
+	//팝업관련
+	$("#popup .imgUrl___").on("change", function (e) {
+		//popup_clear()
+
+		var $this = $(this);
+		var imgUrl = $this.val();
+
+		//alert($this.val())
+
+
+		if (input_state == true) {
+			$("#holder").empty()
+		};
+
+		if (imgUrl.indexOf(".jpg") != -1 || imgUrl.indexOf(".JPG") != -1 || imgUrl.indexOf(".PNG") != -1 || imgUrl.indexOf(".png") != -1) {
+
+
+			//alert("이미지 경로가 정상으로 보임")
+			$("#popup").animate({}, 5,
+				function () {
+
+					$this.parents("#popup").find("#holder").append('' +
+						'<img class="popup_in_img" src="' + imgUrl + '"/>')
+					pop_img = imgUrl;
+
+
+					$('.popup_in_img').error(function () {
+						//로드된 팝업이미지가 404 error 이면 실행
+						//alert("이미지 경로가 입력되었으나, 잘못되었습니다.");
+						$('.popup_in_img').css("display", "none");
+
+						$this.parents("#popup").find("#holder").append('' +
+							'<div class="not_img_message" style="display:block;">해당 링크의 정보를 불러올수 없습니다<br>링크를 다시 확인 해 주세요</div>');
+
+						$(".imgUrl").val("");
+						popup_resize(1); //팝업창 리사이즈 타입1번
+						//}).attr( "src", imgUrl);
+					}).load(function () {
+
+						console.log('------------------------------------');
+						console.log('정상적인 이미지 로드');
+						console.log('------------------------------------');
+						$('.popup_in_img').css("display", "block");
+						popup_resize(2); //팝업창 리사이즈 타입2번
+					});
+
+					input_state = true;
+
+				})
+
+		} else {
+			popup_clear();
+			alert("정상적인 이미지 경로가 아닙니다.")
+		}
+	});
 
 	$("#popup .linkUrl").on("change", function (e) {
 		var $this = $(this);
@@ -144,6 +200,8 @@ $(document).ready(function () {
 		pop_link = linkUrl;
 		//console.log(pop_link)
 	});
+
+
 
 	$(".new_btn .addBtn").on("click", function (e) {
 		e.preventDefault()
@@ -164,7 +222,6 @@ $(document).ready(function () {
 });
 
 function imageCheck() {
-	//이미지 유효성체크
 	var $this = $("#popup .imgUrl");
 	var imgUrl = $this.val();
 
@@ -297,7 +354,7 @@ function popup_clear() {
 //팝업 - 확인 클릭 - 하단썸네일 생성( ui-update )
 function popup_info_check() {
 	if (input_state == false) {
-		alert("이미지 검색을 버튼을 클릭해주세요")
+		alert("이미지 경로를 입력해주세요")
 		return;
 	}
 	var img_str = $(".imgUrl").val()

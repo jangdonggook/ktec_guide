@@ -6,7 +6,7 @@ app.use('/public', express.static('public'))
 
 
 app.get('/' , function(req , res){
-    res.send('<h1>Ho</h1>')
+    res.send('<h1>Guide Main</h1>')
 });
 
 // app.listen(3000 , function(){
@@ -16,7 +16,3 @@ app.get('/' , function(req , res){
 app.listen(process.env.PORT || 8080, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
-
-
-
-

@@ -296,10 +296,10 @@ function popup_clear() {
 
 //팝업 - 확인 클릭 - 하단썸네일 생성( ui-update )
 function popup_info_check() {
-	if (input_state == false) {
-		alert("이미지 검색을 버튼을 클릭해주세요")
-		return;
-	}
+	// if (input_state == false) {
+	// 	alert("이미지 경로를 입력해주세요")
+	// 	return;
+	// }
 	var img_str = $(".imgUrl").val()
 	var link_str = $(".lineUrl").val()
 	if (img_str == null || img_str == undefined || img_str == "") {

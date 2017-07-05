@@ -1,8 +1,10 @@
+
+
 /**
  * 글로벌 변수
  */
 
-var str = ""; // 코딩내용을 담는 문자열
+var str=""; // 코딩내용을 담는 문자열
 var total = -1;
 var isView = -1;
 var pop_img; // 팝업에 표시되는 이미지 저장
@@ -67,7 +69,7 @@ function ui_update() {
 			'<a href="' + linkA + '" target="_blank"><img src="' + imgA + '" alt=""></a>' +
 			'</div>');
 
-
+			
 
 
 	});
@@ -92,7 +94,7 @@ function ui_update() {
 	});
 
 
-
+	
 
 };
 
@@ -131,12 +133,67 @@ $(document).ready(function () {
 		menuMake()
 	});
 
-	//돋보기버튼 클릭
-	$(".pop_img_ok").on('click', function () {
-		//alert('검색')
-		imageCheck();
+
+	$(".pop_img_ok").on('click' , function(){
+
 	});
-	
+
+
+	//팝업관련
+	$("#popup .imgUrl").on("change", function (e) {
+		//popup_clear()
+
+		var $this = $(this);
+		var imgUrl = $this.val();
+
+		//alert($this.val())
+
+
+		if (input_state == true) {
+			$("#holder").empty()
+		};
+
+		if (imgUrl.indexOf(".jpg") != -1 || imgUrl.indexOf(".JPG") != -1 || imgUrl.indexOf(".PNG") != -1 || imgUrl.indexOf(".png") != -1) {
+
+
+			//alert("이미지 경로가 정상으로 보임")
+			$("#popup").animate({}, 5,
+				function () {
+
+					$this.parents("#popup").find("#holder").append('' +
+						'<img class="popup_in_img" src="' + imgUrl + '"/>')
+					pop_img = imgUrl;
+
+
+					$('.popup_in_img').error(function () {
+						//로드된 팝업이미지가 404 error 이면 실행
+						//alert("이미지 경로가 입력되었으나, 잘못되었습니다.");
+						$('.popup_in_img').css("display", "none");
+
+						$this.parents("#popup").find("#holder").append('' +
+							'<div class="not_img_message" style="display:block;">해당 링크의 정보를 불러올수 없습니다<br>링크를 다시 확인 해 주세요</div>');
+
+						$(".imgUrl").val("");
+						popup_resize(1); //팝업창 리사이즈 타입1번
+						//}).attr( "src", imgUrl);
+					}).load(function () {
+
+						console.log('------------------------------------');
+						console.log('정상적인 이미지 로드');
+						console.log('------------------------------------');
+						$('.popup_in_img').css("display", "block");
+						popup_resize(2); //팝업창 리사이즈 타입2번
+					});
+
+					input_state = true;
+
+				})
+
+		} else {
+			popup_clear();
+			alert("정상적인 이미지 경로가 아닙니다.")
+		}
+	});
 
 	$("#popup .linkUrl").on("change", function (e) {
 		var $this = $(this);
@@ -144,6 +201,8 @@ $(document).ready(function () {
 		pop_link = linkUrl;
 		//console.log(pop_link)
 	});
+
+
 
 	$(".new_btn .addBtn").on("click", function (e) {
 		e.preventDefault()
@@ -155,68 +214,13 @@ $(document).ready(function () {
 	});
 
 
-
+	
 
 
 	top_event()
 
 	//menuMake();//이벤트 시작
 });
-
-function imageCheck() {
-	//이미지 유효성체크
-	var $this = $("#popup .imgUrl");
-	var imgUrl = $this.val();
-
-	//alert($this.val())
-
-
-	if (input_state == true) {
-		$("#holder").empty()
-	};
-
-	if (imgUrl.indexOf(".jpg") != -1 || imgUrl.indexOf(".JPG") != -1 || imgUrl.indexOf(".PNG") != -1 || imgUrl.indexOf(".png") != -1) {
-
-
-		//alert("이미지 경로가 정상으로 보임")
-		$("#popup").animate({}, 5,
-			function () {
-
-				$this.parents("#popup").find("#holder").append('' +
-					'<img class="popup_in_img" src="' + imgUrl + '"/>')
-				pop_img = imgUrl;
-
-
-				$('.popup_in_img').error(function () {
-					//로드된 팝업이미지가 404 error 이면 실행
-					//alert("이미지 경로가 입력되었으나, 잘못되었습니다.");
-					$('.popup_in_img').css("display", "none");
-
-					$this.parents("#popup").find("#holder").append('' +
-						'<div class="not_img_message" style="display:block;">해당 링크의 정보를 불러올수 없습니다<br>링크를 다시 확인 해 주세요</div>');
-
-					$(".imgUrl").val("");
-					popup_resize(1); //팝업창 리사이즈 타입1번
-					//}).attr( "src", imgUrl);
-				}).load(function () {
-
-					console.log('------------------------------------');
-					console.log('정상적인 이미지 로드');
-					console.log('------------------------------------');
-					$('.popup_in_img').css("display", "block");
-					popup_resize(2); //팝업창 리사이즈 타입2번
-				});
-
-				input_state = true;
-
-			})
-
-	} else {
-		popup_clear();
-		alert("정상적인 이미지 경로가 아닙니다.")
-	}
-}
-
 
 function menuMake() {
 	var data_index = 1;
@@ -297,7 +301,7 @@ function popup_clear() {
 //팝업 - 확인 클릭 - 하단썸네일 생성( ui-update )
 function popup_info_check() {
 	if (input_state == false) {
-		alert("이미지 검색을 버튼을 클릭해주세요")
+		alert("이미지 경로를 입력해주세요")
 		return;
 	}
 	var img_str = $(".imgUrl").val()
@@ -322,13 +326,13 @@ function top_event() {
 	var isView = 0;
 
 
-	$(".icon li>a").each(function (index) {
+	$(".icon li>a").each(function(index){
 		var $this = $(this)
-		$this.click(function () {
+		$this.click(function(){
 			isView = index;
-			if (isView == 0) {
+			if(isView == 0){
 				isWeb = "desktop"
-			} else {
+			}else{
 				isWeb = "mobile"
 			}
 			selectMenu(isView)
@@ -340,17 +344,17 @@ function top_event() {
 		$(".icon li").removeClass("select");
 		$(".icon li").eq(n).addClass("select");
 
-		if (isWeb == "desktop") {
+		if(isWeb == "desktop"){
 			browse_window(980)
-		} else {
+		}else{
 			browse_window(375)
 		};
 	};
 
 	$(".downBtn").on('click', function () {
 		if (coding_souce_message == "yes") {
-			download('noName.html', str)
-		} else {
+			download('noName.html' , str)
+		}else{
 			alert("소스보기 버튼을 클릭하여 코드를 생성 or 갱신 해주세요!")
 		}
 	});
@@ -363,8 +367,8 @@ function top_event() {
 };
 
 //보여지는 창 설정
-function browse_window(getWidth) {
-	$("#mobileViewArea").stop(true, true).animate({
+function browse_window(getWidth){
+	$("#mobileViewArea").stop(true,true).animate({
 		width: getWidth
 	}, 200, function () {
 		ui_update();
@@ -375,14 +379,14 @@ function browse_window(getWidth) {
 
 
 
-function copyHtml() {
+function copyHtml() {	
 	/**
 	 * isWeb 웹  || 모바일 체크해서 해당소스 붙이기
 	 */
-	var option = "";
-	str = "";
+	var option="";
+	str="";
 
-	if (isWeb == "desktop") {
+	if(isWeb == "desktop"){
 
 		str = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 				<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
@@ -410,7 +414,7 @@ function copyHtml() {
 					<script src="http://eventimg.auction.co.kr/md/auction/08405BF42E/idangerous.swiper.js"></script>
 				</head>
 				<body>`;
-
+	
 		option = `<script>
 							var mySwiper = new Swiper('#p_wrapper_slide .swiper-container', {			
 								pagination:'#p_wrapper_slide .swiper-pagination',
@@ -435,8 +439,8 @@ function copyHtml() {
 							});
 					</script>`;
 
-	} else {
-
+	}else{
+		
 		str = `<!DOCTYPE html>
 					<html lang="ko">
 					<head>
@@ -484,12 +488,12 @@ function copyHtml() {
 	}
 
 
-
+	
 
 	str = str + '<div id="p_wrapper_slide">' + changeTarget($("#p_wrapper_slide").html().split('<script>')[0]) + option + '</div></body>';
 
 
-
+	
 
 	//window.prompt("Copy to clipboard: Ctrl+C, Enter", str);
 	//console.log(str)
@@ -509,14 +513,13 @@ function copyHtml() {
 	coding_souce_message = "yes";
 
 };
-
-function changeTarget(str) {
+function changeTarget(str){
 	var _str = str;
 
-	if (isWeb == "desktop") {
-		return _str.replace(/target="_blank"/g, 'target="_blank"'); //데스크탑
-	} else {
-		return _str.replace(/target="_blank"/g, 'target="_parent"'); //모바일
+	if(isWeb == "desktop"){
+		return _str.replace(/target="_blank"/g,'target="_blank"');//데스크탑
+	}else{
+		return _str.replace(/target="_blank"/g,'target="_parent"');//모바일
 	}
 }
 

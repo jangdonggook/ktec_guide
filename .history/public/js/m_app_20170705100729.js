@@ -1,8 +1,9 @@
+
 /**
  * 글로벌 변수
  */
 
-var str = ""; // 코딩내용을 담는 문자열
+var str=""; // 코딩내용을 담는 문자열
 var total = -1;
 var isView = -1;
 var pop_img; // 팝업에 표시되는 이미지 저장
@@ -32,11 +33,14 @@ function ui_update() {
 				<div class="swiper-wrapper">
 					
 					
+
 				</div>
 			</div>			
+
 			<!-- Add Arrows -->
 			<div class="swiper-button-next swiper-button-black"></div>
 			<div class="swiper-button-prev swiper-button-black"></div>
+
 			<div class="swiper-pagination"></div>
 		</div>
 			<script>
@@ -47,7 +51,7 @@ function ui_update() {
 						prevButton: '#p_wrapper_slide  .swiper-button-prev',
 						pagination: '#p_wrapper_slide .swiper-pagination',
 						paginationClickable: true,
-						loop: true,
+						loop: false,
 						autoHeight: true,
 						spaceBetween: 0
 					});
@@ -66,8 +70,6 @@ function ui_update() {
 			'<div class="swiper-slide">' +
 			'<a href="' + linkA + '" target="_blank"><img src="' + imgA + '" alt=""></a>' +
 			'</div>');
-
-
 
 
 	});
@@ -92,7 +94,7 @@ function ui_update() {
 	});
 
 
-
+	
 
 };
 
@@ -131,12 +133,13 @@ $(document).ready(function () {
 		menuMake()
 	});
 
+
+
 	//돋보기버튼 클릭
 	$(".pop_img_ok").on('click', function () {
 		//alert('검색')
 		imageCheck();
 	});
-	
 
 	$("#popup .linkUrl").on("change", function (e) {
 		var $this = $(this);
@@ -144,6 +147,8 @@ $(document).ready(function () {
 		pop_link = linkUrl;
 		//console.log(pop_link)
 	});
+
+
 
 	$(".new_btn .addBtn").on("click", function (e) {
 		e.preventDefault()
@@ -155,7 +160,13 @@ $(document).ready(function () {
 	});
 
 
-
+	$(".downBtn").on('click', function () {
+		if (coding_souce_message == "yes") {
+			download('noName.html' , str)
+		}else{
+			alert("소스보기 버튼을 클릭하여 코드를 생성 or 갱신 해주세요!")
+		}
+	});
 
 
 	top_event()
@@ -216,7 +227,6 @@ function imageCheck() {
 		alert("정상적인 이미지 경로가 아닙니다.")
 	}
 }
-
 
 function menuMake() {
 	var data_index = 1;
@@ -321,179 +331,90 @@ function popup_info_check() {
 function top_event() {
 	var isView = 0;
 
-
-	$(".icon li>a").each(function (index) {
+	/*$(".icon li>a").each(function(index){
 		var $this = $(this)
-		$this.click(function () {
+		$this.click(function(){
 			isView = index;
-			if (isView == 0) {
+			if(isView == 0){
 				isWeb = "desktop"
-			} else {
+			}else{
 				isWeb = "mobile"
 			}
 			selectMenu(isView)
-			//allClear()
+			allClear()
 		});
-	});
+		
+
+	});*/
 
 	selectMenu = function (n) {
 		$(".icon li").removeClass("select");
 		$(".icon li").eq(n).addClass("select");
-
-		if (isWeb == "desktop") {
-			browse_window(980)
-		} else {
-			browse_window(375)
-		};
 	};
 
-	$(".downBtn").on('click', function () {
-		if (coding_souce_message == "yes") {
-			download('noName.html', str)
-		} else {
-			alert("소스보기 버튼을 클릭하여 코드를 생성 or 갱신 해주세요!")
-		}
+	$('.downBtn').on("click", function (e) {
+		e.preventDefault()
 	});
-
 	$('.viewBtn').on("click", function (e) {
 		e.preventDefault()
 		copyHtml()
 	});
 
-};
-
-//보여지는 창 설정
-function browse_window(getWidth) {
-	$("#mobileViewArea").stop(true, true).animate({
-		width: getWidth
-	}, 200, function () {
-		ui_update();
-	});
 }
 
-
-
-
-
 function copyHtml() {
-	/**
-	 * isWeb 웹  || 모바일 체크해서 해당소스 붙이기
-	 */
-	var option = "";
-	str = "";
-
-	if (isWeb == "desktop") {
-
-		str = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-				<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+	str="";
+	str = `<!DOCTYPE html>
+				<html lang="ko">
 				<head>
-					<title>web swiper</title>
-					<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
-					<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-					<link rel="stylesheet" href="http://eventimg.auction.co.kr/md/auction/08405BF42E/idangerous.swiper.css">
+					<meta charset="euc-kr">
+					<title>mobile swiper</title>
+					<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1, user-scalable=no" />
+					<meta http-equiv="cleartype" content="on"/>
+					<link rel="stylesheet" href="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.css">	
 					<style type="text/css">
 						*{margin:0;padding:0}
 						img{border:0;vertical-align:top}
 						li{list-style:none}
 						
-						#p_wrapper_slide{width:980px; height:460px; margin:0 auto;position:relative;display: blcok; }		
-						#p_wrapper_slide .swiper-wrapper{position:relative}
-						#p_wrapper_slide .swiper-slide{position:relative; text-align: center; width:100%;}
-						#p_wrapper_slide .swiper-slide img{width:100% !important;}
-						#p_wrapper_slide .swiper-pagination{width:100%;left:0}
-						#p_wrapper_slide .swiper-pagination .swiper-pagination-switch{width:12px;height:12px;display:inline-block;*display:inline;*zoom:1;padding:0 8px;background:url(images/w_ico_blit_off.png) no-repeat 0 0;border-radius:0}
-						#p_wrapper_slide .swiper-pagination .swiper-active-switch{background:url(images/w_ico_blit_on.png) no-repeat 0 0}
-						#p_wrapper_slide .swiper-button-prev{width:68px;height:68px;position:absolute;top:50%;margin-top:-34px;left:0;background:url(images/w_btn_prev.png) no-repeat 0 0;z-index:100;cursor:pointer}
-						#p_wrapper_slide .swiper-button-next{width:68px;height:68px;position:absolute;top:50%;margin-top:-34px;right:0;background:url(images/w_btn_next.png) no-repeat 0 0;z-index:100;cursor:pointer}
+							#p_wrapper_slide{margin:0 auto;position:relative}
+							#p_wrapper_slide img{width:100%}
+							#p_wrapper_slide .slider_wrap{position:relative;overflow:hidden;background:#fff;}
+							#p_wrapper_slide .swiper-container {overflow:hidden;position:relative}
+							#p_wrapper_slide .swiper-wrapper {width:100%;height:100%}
+							#p_wrapper_slide .swiper-slide {overflow:hidden;position:relative}		
+							#p_wrapper_slide .swiper-pagination{width:100%;text-align:center;position:absolute;left:0;bottom:3%;}
+							#p_wrapper_slide .swiper-pagination-bullet{width:6px;height:6px;margin:0 5px;background:#000;border:2px #000 solid;border-radius:100%;opacity:1}
+							#p_wrapper_slide .swiper-pagination-bullet-active{border:2px #000 solid;opacity:1;background:transparent}
+							#p_wrapper_slide .swiper-button-prev{opacity:0.3;width:40px;height:40px;z-index:10;top:50%;background-color:#fff;background-size:30px 20px;margin-top:-20px;left:0}
+							#p_wrapper_slide .swiper-button-next{opacity:0.3;width:40px;height:40px;z-index:10;top:50%;background-color:#fff;background-size:30px 20px;margin-top:-20px;right:0}
+
+
+
 					</style>
-					<script type="text/javascript" src="http://script.auction.co.kr/common/jquery.js"></script>
-					<script src="http://eventimg.auction.co.kr/md/auction/08405BF42E/idangerous.swiper.js"></script>
+					<script type="text/javascript" src="http://eventimg.auction.co.kr/md/auction/086A428A1C/jquery-1.11.3.min.js"></script>
+					<script src="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.js"></script>
 				</head>
 				<body>`;
 
-		option = `<script>
-							var mySwiper = new Swiper('#p_wrapper_slide .swiper-container', {			
-								pagination:'#p_wrapper_slide .swiper-pagination',
-								paginationClickable:true,
-								simulateTouch:true,
-								loop:true,
-								autoplay:3000,
-								calculateHeight:true,
-								slidesPerView:1
-							});
-							$('#p_wrapper_slide .swiper-button-prev').bind('click', function(e){
-								e.preventDefault();
-								mySwiper.stopAutoplay();
-								mySwiper.swipePrev();
-								mySwiper.startAutoplay();
-							});
-							$('#p_wrapper_slide .swiper-button-next').bind('click', function(e){
-								e.preventDefault();
-								mySwiper.stopAutoplay();
-								mySwiper.swipeNext();
-								mySwiper.startAutoplay();
+	var option = `<script>
+							var swiper01 = new Swiper('#p_wrapper_slide .slider_wrap .swiper-container', {				
+								autoplay : 4500,
+								nextButton: '#p_wrapper_slide .slider_wrap .swiper-button-next',
+								prevButton: '#p_wrapper_slide .slider_wrap .swiper-button-prev',
+								pagination: '#p_wrapper_slide .swiper-pagination',
+								paginationClickable: true,
+								loop: true,
+								autoHeight: true,
+								spaceBetween: 0
 							});
 					</script>`;
 
-	} else {
-
-		str = `<!DOCTYPE html>
-					<html lang="ko">
-					<head>
-						<meta charset="euc-kr">
-						<title>mobile swiper</title>
-						<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1, user-scalable=no" />
-						<meta http-equiv="cleartype" content="on"/>
-						<link rel="stylesheet" href="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.css">	
-						<style type="text/css">
-							*{margin:0;padding:0}
-							img{border:0;vertical-align:top}
-							li{list-style:none}
-							
-								#p_wrapper_slide{margin:0 auto;position:relative}
-								#p_wrapper_slide img{width:100%}
-								#p_wrapper_slide .slider_wrap{position:relative;overflow:hidden;background:#fff;}
-								#p_wrapper_slide .swiper-container {overflow:hidden;position:relative}
-								#p_wrapper_slide .swiper-wrapper {width:100%;height:100%}
-								#p_wrapper_slide .swiper-slide {overflow:hidden;position:relative}		
-								#p_wrapper_slide .swiper-pagination{width:100%;text-align:center;position:absolute;left:0;bottom:3%;}
-								#p_wrapper_slide .swiper-pagination-bullet{width:6px;height:6px;margin:0 5px;background:#000;border:2px #000 solid;border-radius:100%;opacity:1}
-								#p_wrapper_slide .swiper-pagination-bullet-active{border:2px #000 solid;opacity:1;background:transparent}
-								#p_wrapper_slide .swiper-button-prev{opacity:0.3;width:40px;height:40px;z-index:10;top:50%;background-color:#fff;background-size:30px 20px;margin-top:-20px;left:0}
-								#p_wrapper_slide .swiper-button-next{opacity:0.3;width:40px;height:40px;z-index:10;top:50%;background-color:#fff;background-size:30px 20px;margin-top:-20px;right:0}
-						</style>
-						<script type="text/javascript" src="http://eventimg.auction.co.kr/md/auction/086A428A1C/jquery-1.11.3.min.js"></script>
-						<script src="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.js"></script>
-					</head>
-					<body>`;
-
-		option = `<script>
-								var swiper01 = new Swiper('#p_wrapper_slide .slider_wrap .swiper-container', {				
-									autoplay : 4500,
-									nextButton: '#p_wrapper_slide .slider_wrap .swiper-button-next',
-									prevButton: '#p_wrapper_slide .slider_wrap .swiper-button-prev',
-									pagination: '#p_wrapper_slide .swiper-pagination',
-									paginationClickable: true,
-									loop: true,
-									autoHeight: true,
-									spaceBetween: 0
-								});
-						</script>`;
-
-
-	}
-
-
-
-
 	str = str + '<div id="p_wrapper_slide">' + changeTarget($("#p_wrapper_slide").html().split('<script>')[0]) + option + '</div></body>';
-
-
-
 
 	//window.prompt("Copy to clipboard: Ctrl+C, Enter", str);
 	//console.log(str)
-	console.log($("#p_wrapper_slide").html().split('<script>')[0]) // target="_blank"
+	//console.log(str)
 
 	//console.log($("#p_wrapper_slide").html().split('<script>')[0])
 
@@ -508,18 +429,16 @@ function copyHtml() {
 
 	coding_souce_message = "yes";
 
-};
-
-function changeTarget(str) {
-	var _str = str;
-
-	if (isWeb == "desktop") {
-		return _str.replace(/target="_blank"/g, 'target="_blank"'); //데스크탑
-	} else {
-		return _str.replace(/target="_blank"/g, 'target="_parent"'); //모바일
-	}
 }
-
+function changeTarget(str){
+	var _str = str;
+	return _str.replace(/target="_blank"/g,'target="_parent"');//모바일
+	// if(isWeb == "desktop"){
+	// 	return _str.replace(/target="_blank"/g,'target="_blank"');//데스크탑
+	// }else{
+	// 	return _str.replace(/target="_blank"/g,'target="_parent"');//모바일
+	// }
+}
 //파일 다운 로드 관련
 function download(filename, text) {
 	var element = document.createElement('a');
