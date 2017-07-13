@@ -61,6 +61,9 @@ function ui_update() {
 						},
 						onSlideChangeEnd : function(){
 							$('div').removeClass('swiper-button-disabled')
+						},
+						onInit : function(){
+							$('div').removeClass('swiper-button-disabled')
 						}
 					});
 				},10)
