@@ -61,7 +61,7 @@ body{background-color: #f7f7f7; overflow:hidden}
 #popup input{width:513px; height:39px; font-size:13px; border:1px solid #9f9f9f; color:#9f9f9f; padding-left: 10px;}
 #holder{margin:12px 0; /*border:1px solid #9f9f9f; */width:523px;}
 .pop_img_ok{position: absolute; right:65px; top:61px;}
-#holder .popup_in_img{height:245px; display: block;}
+#holder .popup_in_img{height:245px; display: block; box-shadow: 4px 4px 4px #e3e3e3;}
 #holder .not_img_message{ font-size:13px;  color:#9f9f9f; text-align: center; padding:33px 0px; display: none; position:relative;}
 
 .controlCase{position: absolute; bottom:0; left:210px; display: block; padding-bottom: 50px;}

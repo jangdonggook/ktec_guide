@@ -18,6 +18,9 @@ var viewSouce = new InputView();//소스보기 class
 
 
 
+
+
+
 function ui_update() {
 	coding_souce_message = "no";
 	console.log('업데이트')
@@ -45,24 +48,20 @@ function ui_update() {
 				setTimeout(function(){
 					var mySwiper = new Swiper('#p_wrapper_slide .swiper-container', {			
 						pagination:'#p_wrapper_slide .swiper-pagination',
+						nextButton: '#p_wrapper_slide  .swiper-button-next',
+						prevButton: '#p_wrapper_slide  .swiper-button-prev',						
 						paginationClickable:true,
 						simulateTouch:true,
 						loop:false,
 						autoplay:false,
 						calculateHeight:true,
-						slidesPerView:1
-					});
-					$('#p_wrapper_slide .swiper-button-prev').bind('click', function(e){
-						e.preventDefault();
-						mySwiper.stopAutoplay();
-						mySwiper.swipePrev();
-						mySwiper.startAutoplay();
-					});
-					$('#p_wrapper_slide .swiper-button-next').bind('click', function(e){
-						e.preventDefault();
-						mySwiper.stopAutoplay();
-						mySwiper.swipeNext();
-						mySwiper.startAutoplay();
+						slidesPerView:1,
+						onSlideChangeStart : function(){
+							$('div').removeClass('swiper-button-disabled')
+						},
+						onSlideChangeEnd : function(){
+							$('div').removeClass('swiper-button-disabled')
+						}
 					});
 				},10)
 			</script>`)
@@ -88,9 +87,15 @@ function ui_update() {
 						prevButton: '#p_wrapper_slide  .swiper-button-prev',
 						pagination: '#p_wrapper_slide .swiper-pagination',
 						paginationClickable: true,
-						loop: true,
+						loop: false,
 						autoHeight: true,
-						spaceBetween: 0
+						spaceBetween: 0,
+						onSlideChangeStart : function(){
+							$('div').removeClass('swiper-button-disabled')
+						},
+						onSlideChangeEnd : function(){
+							$('div').removeClass('swiper-button-disabled')
+						}
 					});
 				},10)
 			</script>`)
@@ -437,15 +442,15 @@ function copyHtml() {
 						img{border:0;vertical-align:top}
 						li{list-style:none}
 						
-						#p_wrapper_slide{width:980px; height:460px; margin:0 auto;position:relative;display: blcok; }		
+						#p_wrapper_slide{width:980px; margin:0 auto;position:relative;display: blcok; }		
 						#p_wrapper_slide .swiper-wrapper{position:relative}
 						#p_wrapper_slide .swiper-slide{position:relative; text-align: center; width:100%;}
 						#p_wrapper_slide .swiper-slide img{width:100% !important;}
 						#p_wrapper_slide .swiper-pagination{width:100%;left:0}
-						#p_wrapper_slide .swiper-pagination .swiper-pagination-switch{width:12px;height:12px;display:inline-block;*display:inline;*zoom:1;padding:0 8px;background:url(images/w_ico_blit_off.png) no-repeat 0 0;border-radius:0}
-						#p_wrapper_slide .swiper-pagination .swiper-active-switch{background:url(images/w_ico_blit_on.png) no-repeat 0 0}
-						#p_wrapper_slide .swiper-button-prev{width:68px;height:68px;position:absolute;top:50%;margin-top:-34px;left:0;background:url(images/w_btn_prev.png) no-repeat 0 0;z-index:100;cursor:pointer}
-						#p_wrapper_slide .swiper-button-next{width:68px;height:68px;position:absolute;top:50%;margin-top:-34px;right:0;background:url(images/w_btn_next.png) no-repeat 0 0;z-index:100;cursor:pointer}
+						#p_wrapper_slide .swiper-pagination .swiper-pagination-switch{width:12px;height:12px;display:inline-block;*display:inline;*zoom:1;padding:0 8px;background:url(http://eventimg.auction.co.kr/md/auction/099D7A12D7/w_ico_blit_off.png) no-repeat 0 0;border-radius:0}
+						#p_wrapper_slide .swiper-pagination .swiper-active-switch{background:url(http://eventimg.auction.co.kr/md/auction/099D7A12D7/w_ico_blit_on.png) no-repeat 0 0}
+						#p_wrapper_slide .swiper-button-prev{width:68px;height:68px;position:absolute;top:50%;margin-top:-34px;left:0;background:url(http://eventimg.auction.co.kr/md/auction/099D7A12D7/w_btn_prev.png) no-repeat 0 0;z-index:100;cursor:pointer}
+						#p_wrapper_slide .swiper-button-next{width:68px;height:68px;position:absolute;top:50%;margin-top:-34px;right:0;background:url(http://eventimg.auction.co.kr/md/auction/099D7A12D7/w_btn_next.png) no-repeat 0 0;z-index:100;cursor:pointer}
 					</style>
 					<script type="text/javascript" src="http://script.auction.co.kr/common/jquery.js"></script>
 					<script src="http://eventimg.auction.co.kr/md/auction/08405BF42E/idangerous.swiper.js"></script>
