@@ -9,28 +9,43 @@
 	<link rel="stylesheet" href="css/swiper_wm.css">
 	
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>	
-	<script type="text/javascript" src="http://eventimg.auction.co.kr/md/auction/04D25F0304/jquery.easing-1.3.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="plugin/jquery.copy-to-clipboard.js"></script>
 
-	<link rel="stylesheet" href="com/display/view/SystemMsg.css">
-	<script src="com/display/view/SystemMsg.js"></script>
-
-	<link rel="stylesheet" href="com/display/view/InputView.css">
-	<script src="com/display/view/InputView.js"></script>
 
 	<link rel="stylesheet" href="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.css">		
-	<script type="text/javascript" src="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.js"></script>
+	<script src="http://eventimg.auction.co.kr/md/auction/0868D4BD4A/swiper.min.js"></script>
 	
+	
+	<script src="js/swiper_wm.js"></script>
+	<link rel="stylesheet" href="plugin/prism.css">
 </head>
 
 <body>
 
-	<!--시스템팝업  SystemMsg.js에서 선언-->
-	
+	<!--시스템팝업-->
+	<div class="alert_layout">
 
-	<!--소스보기팝업 InputView.js에서 선언-->
-	
+		<div>
+
+			<p>
+				<a class="btn_layout" href="#">x</a>
+
+			</p>
+
+
+			<!--소스보기 버튼을 클릭하여 코드를 생성 or 갱신 해주세요!-->
+			
+
+
+			<p>
+				<a class="btn_layout" href="#">확인</a>
+			</p>
+		</div>
+
+
+		
+	</div>
 
 
 	
@@ -54,12 +69,12 @@
 	<div id="wrapper">
 		<div id="header">
 			<div class="top">
-				<!-- 웹 , 모바일선택 -->
+				<!--웹 , 모바일선택-->
 				<ul class="icon">
 					<li class="select"><a href="javascript:;"><img src="images/desktop_icon.png" alt="pc"></a></li>
 					<li><a href="javascript:;"><img src="images/mobile_icon.png" alt="mobile"></a></li>
 				</ul>
-				<!-- 다운로드 소스보기 -->
+				<!--다운로드 소스보기-->
 				<p class="right">
 					<a class="downBtn" href="#">파일받기</a>
 					<a class="viewBtn" href="#">소스보기</a>
@@ -67,7 +82,7 @@
 				
 			</div>
 			<div class="top_side">
-				<!-- 템플릿 보기 -->
+				<!--템플릿 보기-->
 				<p class="right">
 					<a href="#">템플릿</a>
 				</p>
@@ -77,8 +92,10 @@
 		
 		
 		<div id="mobileViewArea">
-			<div id="p_wrapper_slide">				
-					<!-- loop -->
+			<div id="p_wrapper_slide">
+				
+					<!--loop-->
+
 
 
 			</div>
@@ -95,12 +112,15 @@
 		
 		
 		
-		<!-- 하단메뉴 -->
-		<div id="aside">			
+		<!--하단메뉴-->
+		<div id="aside">
+			<div id="resultArea">
+				<textarea name="" id="" cols="30" rows="10"></textarea>
+			</div>
 			<div class="inc-obj">
 				<ul id="sortable">
 
-					<!-- <li class="ui-state-default btn">
+					<!--<li class="ui-state-default btn">
 						<a class="closeBtn" href=""><img src="images/close_btn.png" /></a>
 						<a href="javascript:;"><img src="images/plus_btn.jpg" /></a>
 					</li>
@@ -112,15 +132,14 @@
 			</div>
 		
 		</div>
-		<!-- 하단메뉴 끝 -->
+		<!--하단메뉴 끝-->
 		
 	</div>
 	
 	
 	
-	
-	<script src="js/swiper_wm.js"></script>
-	
+	<script src="plugin/prism.js"></script>
+
 </body>
 
 </html>

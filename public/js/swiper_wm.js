@@ -13,7 +13,8 @@ var ptemp = -1;
 var isWeb = "desktop"; //desktop or mobile
 var coding_souce_message = "no"; //소스보기 클릭 유무
 
-
+var sAlert = new SystemMsg();//경고창 class
+var viewSouce = new InputView();//소스보기 class
 
 
 
@@ -22,12 +23,52 @@ function ui_update() {
 	console.log('업데이트')
 	/*console.log('pop_img : ' , pop_img)
 	console.log('pop_link : ' , pop_link)*/
-
+	viewSouce.viewClose();
 	str = "";
 
 	//삭제 
 	$("#p_wrapper_slide").empty();
-	$("#p_wrapper_slide").append(`<div class="slider_wrap">
+	if(isWeb == "desktop"){
+		$("#p_wrapper_slide").append(`<div class="slider_wrap">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					
+					
+				</div>
+			</div>			
+			<!-- Add Arrows -->
+			<div class="swiper-button-next swiper-button-black"></div>
+			<div class="swiper-button-prev swiper-button-black"></div>
+			<div class="swiper-pagination"></div>
+		</div>
+			<script>
+				setTimeout(function(){
+					var mySwiper = new Swiper('#p_wrapper_slide .swiper-container', {			
+						pagination:'#p_wrapper_slide .swiper-pagination',
+						paginationClickable:true,
+						simulateTouch:true,
+						loop:false,
+						autoplay:false,
+						calculateHeight:true,
+						slidesPerView:1
+					});
+					$('#p_wrapper_slide .swiper-button-prev').bind('click', function(e){
+						e.preventDefault();
+						mySwiper.stopAutoplay();
+						mySwiper.swipePrev();
+						mySwiper.startAutoplay();
+					});
+					$('#p_wrapper_slide .swiper-button-next').bind('click', function(e){
+						e.preventDefault();
+						mySwiper.stopAutoplay();
+						mySwiper.swipeNext();
+						mySwiper.startAutoplay();
+					});
+				},10)
+			</script>`)
+
+	}else{
+		$("#p_wrapper_slide").append(`<div class="slider_wrap">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					
@@ -54,6 +95,8 @@ function ui_update() {
 				},10)
 			</script>`)
 
+	}
+	
 	//반복 생성
 	$('#sortable li').each(function (index) {
 		var $this = $(this);
@@ -74,20 +117,20 @@ function ui_update() {
 
 	//하단 아이콘 x 버튼 제어
 	var $this;
-	$(".thum_img").on("mouseenter", function () {
+	$(".thum_img").bind("mouseenter", function () {
 		$this = $(this);
 		$this.parent().parent().find(".closeBtn").css("display", "block")
 
 	});
-	$(".thum_img").on("mouseleave", function () {
+	$(".thum_img").bind("mouseleave", function () {
 		$this = $(this);
 		$this.parent().parent().find(".closeBtn").css("display", "none")
 	});
-	$(".closeBtn").on("mouseenter", function () {
+	$(".closeBtn").bind("mouseenter", function () {
 		$this.parent().parent().find(".closeBtn").css("display", "block")
 
 	});
-	$(".closeBtn").on("mouseleave", function () {
+	$(".closeBtn").bind("mouseleave", function () {
 		$this.parent().parent().find(".closeBtn").css("display", "none")
 	});
 
@@ -110,13 +153,15 @@ function allClear() {
 
 	$('#sortable').empty();
 	$("#p_wrapper_slide").empty();
-	$('#resultArea textarea').val(""); //소스보기창 초기화
+	//$('#souceview_layout textarea').val(""); //소스보기창 초기화
 	popup_clear();
 	coding_souce_message = "no";
 }
 
 $(document).ready(function () {
 
+
+	// object 드레그 관련
 	$("#sortable").sortable({
 		revert: false,
 		placeholder: "ui-state-highlight",
@@ -132,26 +177,27 @@ $(document).ready(function () {
 	});
 
 	//돋보기버튼 클릭
-	$(".pop_img_ok").on('click', function () {
+	$(".pop_img_ok").bind('click', function () {
 		//alert('검색')
 		imageCheck();
 	});
 	
 
-	$("#popup .linkUrl").on("change", function (e) {
+	$("#popup .linkUrl").bind("change", function (e) {
 		var $this = $(this);
 		var linkUrl = $this.val();
 		pop_link = linkUrl;
 		//console.log(pop_link)
 	});
 
-	$(".new_btn .addBtn").on("click", function (e) {
+	$(".new_btn .addBtn").bind("click", function (e) {
 		e.preventDefault()
 		//var $this = $(this);
 		//total = $this.parents("#sortable").find("li").length;
 		//isView = $this.parent().index();
 		//console.log("total  : " , total)
 		popup_open()
+		viewSouce.viewClose();
 	});
 
 
@@ -213,7 +259,10 @@ function imageCheck() {
 
 	} else {
 		popup_clear();
-		alert("정상적인 이미지 경로가 아닙니다.")
+		
+		//alert("정상적인 이미지 경로가 아닙니다.")
+		
+		sAlert.view('정상적인 이미지 경로가 아닙니다.')
 	}
 }
 
@@ -227,7 +276,7 @@ function menuMake() {
 		'<a href="javascript:;"><img src="images/plus_btn.jpg" />' +
 		'</a></li>');
 	//하단 생성 버튼관련
-	$(".new_btn .btn>a").on("click", function (e) {
+	$(".new_btn .btn>a").bind("click", function (e) {
 		e.preventDefault()
 		var $this = $(this);
 		total = $this.parents("#sortable").find("li").length;
@@ -247,14 +296,6 @@ function menuRemove(e) {
 //팝업 : 보이기 
 function popup_open() {
 	popup_resize(0) //팝업창 리사이즈 타입0번
-
-	// pop_img = "";
-	// pop_link="";
-	//  $( "#popup" ).animate({
-	// 	 top:"30%",
-	// 	 marginTop:"-155"
-
-	// },200,function(){})
 };
 
 //팝업 : 감추기
@@ -272,7 +313,7 @@ function popup_resize(n) {
 	var spd = [300, 100, 100]
 
 	$("#popup").animate({
-		'top': '50%',
+		'top': '47%',
 		'marginTop': pos_margin_y[n],
 		'height': heightY[n]
 
@@ -285,11 +326,8 @@ function popup_clear() {
 	$(".imgUrl").val(""); //입력창 이미지 경로
 	$(".linkUrl").val(""); //입력창 링크 경로
 	$(".popup_in_img").remove();
-	imgUrl = ""; //입력창 이미지 유효시 저장되는 변수 
-	$("#popup").css({
-		height: "260px"
-	});
-	input_state = false;
+	imgUrl = ""; //입력창 이미지 유효시 저장되는 변수 	
+	input_state = false;//입력창에 내용 없음
 	$('.not_img_message').css("display", "none");
 }
 
@@ -297,7 +335,8 @@ function popup_clear() {
 //팝업 - 확인 클릭 - 하단썸네일 생성( ui-update )
 function popup_info_check() {
 	if (input_state == false) {
-		alert("이미지 검색을 버튼을 클릭해주세요")
+		//alert("이미지 검색을 버튼을 클릭해주세요")
+		sAlert.view('이미지 입력창 우측 찾기 버튼을 클릭해주세요')
 		return;
 	}
 	var img_str = $(".imgUrl").val()
@@ -347,15 +386,16 @@ function top_event() {
 		};
 	};
 
-	$(".downBtn").on('click', function () {
+	$(".downBtn").bind('click', function () {
 		if (coding_souce_message == "yes") {
 			download('noName.html', str)
 		} else {
-			alert("소스보기 버튼을 클릭하여 코드를 생성 or 갱신 해주세요!")
+			//alert("소스보기 버튼을 클릭하여 코드를 생성 or 갱신 해주세요!")
+			sAlert.view('소스보기 버튼을 클릭하여 코드를 생성 or 갱신 해주세요!')
 		}
 	});
 
-	$('.viewBtn').on("click", function (e) {
+	$('.viewBtn').bind("click", function (e) {
 		e.preventDefault()
 		copyHtml()
 	});
@@ -382,6 +422,7 @@ function copyHtml() {
 	var option = "";
 	str = "";
 
+	
 	if (isWeb == "desktop") {
 
 		str = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -434,7 +475,9 @@ function copyHtml() {
 								mySwiper.startAutoplay();
 							});
 					</script>`;
-
+					
+					
+					
 	} else {
 
 		str = `<!DOCTYPE html>
@@ -481,31 +524,17 @@ function copyHtml() {
 						</script>`;
 
 
-	}
-
-
+	};
 
 
 	str = str + '<div id="p_wrapper_slide">' + changeTarget($("#p_wrapper_slide").html().split('<script>')[0]) + option + '</div></body>';
 
 
+	console.log('------------------------------------');
+	console.log(str);
+	console.log('------------------------------------');
 
-
-	//window.prompt("Copy to clipboard: Ctrl+C, Enter", str);
-	//console.log(str)
-	console.log($("#p_wrapper_slide").html().split('<script>')[0]) // target="_blank"
-
-	//console.log($("#p_wrapper_slide").html().split('<script>')[0])
-
-
-	$('#resultArea textarea').val(str)
-
-	$("#resultArea").animate({
-		right: "0"
-	}, 200, function () {
-
-	});
-
+	viewSouce.view(str)
 	coding_souce_message = "yes";
 
 };

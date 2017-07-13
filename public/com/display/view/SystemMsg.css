@@ -1,0 +1,12 @@
+#alert_layout{position: absolute; left:50%; margin-left:-225px; top:-30%; width:450px; z-index: 100000; border:1px solid #e3e3e3; background-color: #fff;    box-shadow: 1px 1px 2px #e3e3e3;}
+#alert_layout p{padding:10px 5px;}
+
+#alert_layout .close{ text-align: right; padding-top:21px !important;}
+#alert_layout .close .pop_close_skin{ padding-right:16px;}
+
+#alert_layout .msg{padding-top:20px !important;}
+#alert_layout .msg input{width:100%; text-align: center;font-size: 14px;}
+
+#alert_layout .okBtn{text-align: center; padding-top:30px; padding-bottom:20px;}
+#alert_layout .okBtn .btn_layout{font-size: 12px; padding:11px 16px 8px 16px; color:#000; text-decoration: none; border:1px solid #e3e3e3; line-height:13px;}
+
