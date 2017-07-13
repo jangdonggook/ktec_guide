@@ -187,12 +187,17 @@ $(document).ready(function () {
 		imageCheck();
 	});
 	
-
+	//링크 값이 입력됬는지
 	$("#popup .linkUrl").bind("change", function (e) {
 		var $this = $(this);
 		var linkUrl = $this.val();
-		pop_link = linkUrl;
-		//console.log(pop_link)
+		
+		if(linkUrl.indexOf("http://") == -1){
+			//http:// 이게 없으면
+			pop_link = "http://" + linkUrl;
+		}else{
+			pop_link = linkUrl;
+		}
 	});
 
 	$(".new_btn .addBtn").bind("click", function (e) {
