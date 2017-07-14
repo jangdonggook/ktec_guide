@@ -98,6 +98,9 @@ function ui_update() {
 						},
 						onSlideChangeEnd : function(){
 							$('div').removeClass('swiper-button-disabled')
+						},
+						onInit : function(){
+							$('div').removeClass('swiper-button-disabled')
 						}
 					});
 				},10)
@@ -105,7 +108,7 @@ function ui_update() {
 
 	}
 	
-	//반복 생성
+	//swiper 아이템 반복생성
 	$('#sortable li').each(function (index) {
 		var $this = $(this);
 		var linkA = $this.find('img').attr('link')
@@ -540,7 +543,7 @@ function copyHtml() {
 	};
 
 
-	str = str + '<div id="p_wrapper_slide">' + changeTarget($("#p_wrapper_slide").html().split('<script>')[0]) + option + '</div></body>';
+	str = str + '<div id="p_wrapper_slide">' + changeTarget($("#p_wrapper_slide").html().split('<script>')[0]) + option + '</div></body></html>';
 
 
 	console.log('------------------------------------');

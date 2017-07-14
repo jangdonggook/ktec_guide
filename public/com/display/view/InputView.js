@@ -6,7 +6,8 @@
  */
 
 
- /** 사용법
+ /** 사용법 
+ * ( 선언 )
  * <script src="https://code.jquery.com/jquery-1.12.4.js"></script>	
  * <script type="text/javascript" src="http://eventimg.auction.co.kr/md/auction/04D25F0304/jquery.easing-1.3.min.js"></script>
  * <link rel="stylesheet" href="com/display/view/InputView.css"> 선언
