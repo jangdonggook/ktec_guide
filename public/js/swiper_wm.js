@@ -22,13 +22,14 @@ var viewSouce = new InputView();//소스보기 class
 
 
 function ui_update() {
+	
 	coding_souce_message = "no";
 	console.log('업데이트')
 	/*console.log('pop_img : ' , pop_img)
 	console.log('pop_link : ' , pop_link)*/
 	viewSouce.viewClose();
 	str = "";
-
+	pop_link="";
 	//삭제 
 	$("#p_wrapper_slide").empty();
 	if(isWeb == "desktop"){
@@ -113,14 +114,24 @@ function ui_update() {
 		var $this = $(this);
 		var linkA = $this.find('img').attr('link')
 		var imgA = $this.find('img').attr('src')
-		//console.log(index + " : lnkurl "  +$this.find('img').attr('link'))
+		console.log(index + " : lnkurl "  +$this.find('img').attr('link'))
 		//console.log(index + " : imgurl "  +$this.find('img').attr('src'))
 
-		$(".swiper-wrapper").append('' +
+
+		//링크값이 입력되었는지 안되었는지
+		if(linkA == null || linkA == undefined || linkA ==""){
+			$(".swiper-wrapper").append('' +	
+			'<div class="swiper-slide">' +
+			'<img src="' + imgA + '" alt="">' +
+			'</div>');
+		}else{
+
+			$(".swiper-wrapper").append('' +
 			'<div class="swiper-slide">' +
 			'<a href="' + linkA + '" target="_blank"><img src="' + imgA + '" alt=""></a>' +
 			'</div>');
-
+		}
+		
 
 
 
