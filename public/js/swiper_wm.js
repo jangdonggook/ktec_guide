@@ -32,11 +32,7 @@ $(document).ready(function() {
         menuMake()
     });
 
-    //돋보기버튼 클릭
-    $(".pop_img_ok").bind('click', function() {
-        //alert('검색')
-        imageCheck();
-    });
+
 
     //링크 값이 입력됬는지
     $("#popup .linkUrl").bind("change", function(e) {
@@ -61,6 +57,79 @@ $(document).ready(function() {
         viewSouce.viewClose();
     });
 
+    //돋보기버튼 클릭
+    // $(".pop_img_ok").bind('click', function() {       
+    //     imageCheck();
+    // });
+
+
+
+    $("#popup .imgUrl").on("change", function (e) {
+		//popup_clear()
+
+		var $this = $(this);
+		var imgUrl = $this.val();
+
+		//alert($this.val())
+
+
+		if (input_state == true) {
+            $("#holder").empty()
+        };
+
+        if (imgUrl.indexOf(".jpg") != -1 || imgUrl.indexOf(".JPG") != -1 || imgUrl.indexOf(".PNG") != -1 || imgUrl.indexOf(".png") != -1) {
+
+
+            //alert("이미지 경로가 정상으로 보임")
+            $("#popup").animate({}, 5,
+                function() {
+
+                    $this.parents("#popup").find("#holder").append('' +
+                        '<img class="popup_in_img" src="' + imgUrl + '"/>')
+                    pop_img = imgUrl;
+
+
+                    $('.popup_in_img').error(function() {
+                        //로드된 팝업이미지가 404 error 이면 실행
+                        //alert("이미지 경로가 입력되었으나, 잘못되었습니다.");
+                        $('.popup_in_img').css("display", "none");
+
+                        $this.parents("#popup").find("#holder").append('' +
+                            '<div class="not_img_message" style="display:block;">해당 링크의 정보를 불러올수 없습니다<br>링크를 다시 확인 해 주세요</div>');
+
+                        $(".imgUrl").val("");
+                        popup_resize(1); //팝업창 리사이즈 타입1번
+                        //}).attr( "src", imgUrl);
+                    }).load(function() {
+
+                        console.log('------------------------------------');
+                        console.log('정상적인 이미지 로드');
+                        console.log('------------------------------------');
+                        $('.popup_in_img').css("display", "block");
+                        popup_resize(2); //팝업창 리사이즈 타입2번
+                    });
+
+                    input_state = true;
+
+                })
+
+        } else {
+            popup_clear();
+
+            //alert("정상적인 이미지 경로가 아닙니다.")
+
+            sAlert.view('정상적인 이미지 경로가 아닙니다.')
+            popup_resize(0);
+        }
+	});
+
+
+
+
+
+
+
+
     top_event()
 
 });
@@ -84,63 +153,62 @@ function allClear() {
 }
 
 
-function imageCheck() {
-    //이미지 유효성체크
-    var $this = $("#popup .imgUrl");
-    var imgUrl = $this.val();
+// function imageCheck() {
+//     //이미지 유효성체크
+//     var $this = $("#popup .imgUrl");
+//     var imgUrl = $this.val();
 
-    //alert($this.val())
+//     //alert($this.val())
 
+//     if (input_state == true) {
+//         $("#holder").empty()
+//     };
 
-    if (input_state == true) {
-        $("#holder").empty()
-    };
-
-    if (imgUrl.indexOf(".jpg") != -1 || imgUrl.indexOf(".JPG") != -1 || imgUrl.indexOf(".PNG") != -1 || imgUrl.indexOf(".png") != -1) {
-
-
-        //alert("이미지 경로가 정상으로 보임")
-        $("#popup").animate({}, 5,
-            function() {
-
-                $this.parents("#popup").find("#holder").append('' +
-                    '<img class="popup_in_img" src="' + imgUrl + '"/>')
-                pop_img = imgUrl;
+//     if (imgUrl.indexOf(".jpg") != -1 || imgUrl.indexOf(".JPG") != -1 || imgUrl.indexOf(".PNG") != -1 || imgUrl.indexOf(".png") != -1) {
 
 
-                $('.popup_in_img').error(function() {
-                    //로드된 팝업이미지가 404 error 이면 실행
-                    //alert("이미지 경로가 입력되었으나, 잘못되었습니다.");
-                    $('.popup_in_img').css("display", "none");
+//         //alert("이미지 경로가 정상으로 보임")
+//         $("#popup").animate({}, 5,
+//             function() {
 
-                    $this.parents("#popup").find("#holder").append('' +
-                        '<div class="not_img_message" style="display:block;">해당 링크의 정보를 불러올수 없습니다<br>링크를 다시 확인 해 주세요</div>');
+//                 $this.parents("#popup").find("#holder").append('' +
+//                     '<img class="popup_in_img" src="' + imgUrl + '"/>')
+//                 pop_img = imgUrl;
 
-                    $(".imgUrl").val("");
-                    popup_resize(1); //팝업창 리사이즈 타입1번
-                    //}).attr( "src", imgUrl);
-                }).load(function() {
 
-                    console.log('------------------------------------');
-                    console.log('정상적인 이미지 로드');
-                    console.log('------------------------------------');
-                    $('.popup_in_img').css("display", "block");
-                    popup_resize(2); //팝업창 리사이즈 타입2번
-                });
+//                 $('.popup_in_img').error(function() {
+//                     //로드된 팝업이미지가 404 error 이면 실행
+//                     //alert("이미지 경로가 입력되었으나, 잘못되었습니다.");
+//                     $('.popup_in_img').css("display", "none");
 
-                input_state = true;
+//                     $this.parents("#popup").find("#holder").append('' +
+//                         '<div class="not_img_message" style="display:block;">해당 링크의 정보를 불러올수 없습니다<br>링크를 다시 확인 해 주세요</div>');
 
-            })
+//                     $(".imgUrl").val("");
+//                     popup_resize(1); //팝업창 리사이즈 타입1번
+//                     //}).attr( "src", imgUrl);
+//                 }).load(function() {
 
-    } else {
-        popup_clear();
+//                     console.log('------------------------------------');
+//                     console.log('정상적인 이미지 로드');
+//                     console.log('------------------------------------');
+//                     $('.popup_in_img').css("display", "block");
+//                     popup_resize(2); //팝업창 리사이즈 타입2번
+//                 });
 
-        //alert("정상적인 이미지 경로가 아닙니다.")
+//                 input_state = true;
 
-        sAlert.view('정상적인 이미지 경로가 아닙니다.')
-        popup_resize(0);
-    }
-}
+//             })
+
+//     } else {
+//         popup_clear();
+
+//         //alert("정상적인 이미지 경로가 아닙니다.")
+
+//         sAlert.view('정상적인 이미지 경로가 아닙니다.')
+//         popup_resize(0);
+//     }
+// }
 
 
 function menuMake() {
@@ -448,9 +516,12 @@ function iconMenuScrollState(){
         bot = 0;
     }
     $("#aside").animate({        
-        'bottom': bot,
+        'bottom': bot    
     }, 350, function() {})
+   
+    $(".inc-obj").scrollLeft(result);
     $('#sortable').width(result);
+
 }
 
 //설명 : 화면에 보여주는 화면 업데이트
