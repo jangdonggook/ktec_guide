@@ -64,21 +64,17 @@ $(document).ready(function() {
 
 
 
-    $("#popup .imgUrl").on("change", function (e) {
+    $("#popup .imgUrl").bind("change", function (e) {
 		//popup_clear()
 
 		var $this = $(this);
-		var imgUrl = $this.val();
-
-		//alert($this.val())
-
+        var imgUrl = $this.val();
 
 		if (input_state == true) {
             $("#holder").empty()
         };
 
         if (imgUrl.indexOf(".jpg") != -1 || imgUrl.indexOf(".JPG") != -1 || imgUrl.indexOf(".PNG") != -1 || imgUrl.indexOf(".png") != -1) {
-
 
             //alert("이미지 경로가 정상으로 보임")
             $("#popup").animate({}, 5,
@@ -87,7 +83,6 @@ $(document).ready(function() {
                     $this.parents("#popup").find("#holder").append('' +
                         '<img class="popup_in_img" src="' + imgUrl + '"/>')
                     pop_img = imgUrl;
-
 
                     $('.popup_in_img').error(function() {
                         //로드된 팝업이미지가 404 error 이면 실행
@@ -115,20 +110,11 @@ $(document).ready(function() {
 
         } else {
             popup_clear();
-
-            //alert("정상적인 이미지 경로가 아닙니다.")
-
-            sAlert.view('정상적인 이미지 경로가 아닙니다.')
+            sAlert.view('정상적인 이미지 경로가 아닙니다.');
             popup_resize(0);
         }
+
 	});
-
-
-
-
-
-
-
 
     top_event()
 
@@ -153,64 +139,9 @@ function allClear() {
 }
 
 
-// function imageCheck() {
-//     //이미지 유효성체크
-//     var $this = $("#popup .imgUrl");
-//     var imgUrl = $this.val();
-
-//     //alert($this.val())
-
-//     if (input_state == true) {
-//         $("#holder").empty()
-//     };
-
-//     if (imgUrl.indexOf(".jpg") != -1 || imgUrl.indexOf(".JPG") != -1 || imgUrl.indexOf(".PNG") != -1 || imgUrl.indexOf(".png") != -1) {
-
-
-//         //alert("이미지 경로가 정상으로 보임")
-//         $("#popup").animate({}, 5,
-//             function() {
-
-//                 $this.parents("#popup").find("#holder").append('' +
-//                     '<img class="popup_in_img" src="' + imgUrl + '"/>')
-//                 pop_img = imgUrl;
-
-
-//                 $('.popup_in_img').error(function() {
-//                     //로드된 팝업이미지가 404 error 이면 실행
-//                     //alert("이미지 경로가 입력되었으나, 잘못되었습니다.");
-//                     $('.popup_in_img').css("display", "none");
-
-//                     $this.parents("#popup").find("#holder").append('' +
-//                         '<div class="not_img_message" style="display:block;">해당 링크의 정보를 불러올수 없습니다<br>링크를 다시 확인 해 주세요</div>');
-
-//                     $(".imgUrl").val("");
-//                     popup_resize(1); //팝업창 리사이즈 타입1번
-//                     //}).attr( "src", imgUrl);
-//                 }).load(function() {
-
-//                     console.log('------------------------------------');
-//                     console.log('정상적인 이미지 로드');
-//                     console.log('------------------------------------');
-//                     $('.popup_in_img').css("display", "block");
-//                     popup_resize(2); //팝업창 리사이즈 타입2번
-//                 });
-
-//                 input_state = true;
-
-//             })
-
-//     } else {
-//         popup_clear();
-
-//         //alert("정상적인 이미지 경로가 아닙니다.")
-
-//         sAlert.view('정상적인 이미지 경로가 아닙니다.')
-//         popup_resize(0);
-//     }
-// }
-
-
+/**
+ * +버튼 생성
+ */
 function menuMake() {
     var data_index = 1;
     $("#sortable .btn>a").off(); //이벤주 중첩방지를 위한 초기화
@@ -259,7 +190,7 @@ function popup_close() {
 function popup_resize(n) {
     var pos_margin_y = ['-160px', '-247px', '-280px'];
     var heightY = ['215px', '295px', '440px'];
-    var spd = [300, 100, 100]
+    var spd = [300, 120, 120]
 
     $("#popup").animate({
         'top': '47%',
@@ -285,7 +216,6 @@ function popup_clear() {
 //설명 : 팝업 - 확인 클릭 - 하단썸네일 생성( ui-update )
 function popup_info_check() {
     if (input_state == false) {
-        //alert("이미지 검색을 버튼을 클릭해주세요")
         sAlert.view('이미지 입력창 우측 찾기 버튼을 클릭해주세요')
         return;
     }
@@ -623,7 +553,7 @@ function ui_update() {
 
 
         //링크값이 입력되었는지 안되었는지
-        if (linkA == null || linkA == undefined || linkA == "") {
+        if (linkA == null || linkA == undefined || linkA == "" || linkA == "undefined") {
             $(".swiper-wrapper").append('' +
                 '<div class="swiper-slide">' +
                 '<img src="' + imgA + '" alt="">' +
