@@ -460,6 +460,8 @@ function ui_update() {
     console.log('업데이트')
         /*console.log('pop_img : ' , pop_img)
         console.log('pop_link : ' , pop_link)*/
+    
+    
     viewSouce.viewClose();
     iconMenuScrollState(); // 하단영역 사이즈 갱신에 따른 스크롤 유무
     str = "";
@@ -570,6 +572,14 @@ function ui_update() {
 
 
     });
+    
+    if( $('.swiper-slide').length == 1 ){
+        
+        $('.swiper-button-next').css('display' , 'none')
+        $('.swiper-button-prev').css('display' , 'none')
+    }
+    
+    
 
     //하단 아이콘 x 버튼 제어
     var $this;
