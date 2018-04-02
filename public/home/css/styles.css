@@ -526,7 +526,9 @@ footer {
 .project-image {
     float: left
 }
-
+.project-image img{
+    width:300px;
+}
 .project-info {
     position: absolute;
     top: 50%;
