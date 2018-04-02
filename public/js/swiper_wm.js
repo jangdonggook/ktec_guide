@@ -567,10 +567,6 @@ function ui_update() {
                 '<a href="' + linkA + '" target="_blank"><img src="' + imgA + '" alt=""></a>' +
                 '</div>');
         }
-
-
-
-
     });
     
     if( $('.swiper-slide').length == 1 ){

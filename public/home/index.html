@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Portfolio</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <script type="text/javascript">
+        
+        var Browser = {
+            chk : navigator.userAgent.toLowerCase()
+        }
+          
+        Browser = {          
+            chrome : Browser.chk.indexOf('chrome') != -1            
+        }
+          
+        if ((Browser.chrome)) {
+            // 브라우저가 IE9, 10일 때 실행할 코드        
+        } else {
+            alert("chrome 브라우져에 최적화 되어 있습니다.")
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+          <!--   <li>
+                <a href="#about">About</a>
+            </li> -->
+            <li>
+                <a href="#experience">Experience</a>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+            </li>
+            <li>
+                <a href="#projects">Projects</a>
+            </li>
+            <li>
+                <a href="#skills">Skills</a>
+            </li>
+           <!--  <li>
+                <a href="#contact">Contact</a>
+            </li> -->
+        </ul>
+    </header>
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>Jdk</h1>
+            <h2>Portfolio</h2>
+            <!-- <a href="#" class="btn-rounded-white">Download Resume</a> -->
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <!-- <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About Me</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        안녕하세요.<br/>
+                        장동국입니다.<br/>
+                        방문해주셔서 감사합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- End #about -->
+
+    <div id="experience" class="background-alt">
+        <h2 class="heading">Experience</h2>
+        <div id="experience-timeline">
+            <div data-date="2010 6월 -  재직중">
+                <h3>ebay Korea</h3>
+                <h4>web publisher</h4>               
+            </div>
+            <div data-date="2009 3월 - 2010년 5월">
+                <h3>그레이블루</h3>
+                <h4>flash ActionScript</h4>               
+            </div>
+            <div data-date="2008 11월 - 2009년 2월">
+                <h3>애드캡슐소프트</h3>
+                <h4>flash ActionScript</h4>               
+            </div>
+            <div data-date="2007 5월 - 2008년 6월">
+                <h3>비에이비오커뮤니케이션</h3>
+                <h4>flash ActionScript</h4>
+               
+            </div>
+           
+        </div>
+    </div>
+    <!-- End #experience -->
+
+    <div id="education">
+        <h2 class="heading">Education</h2>
+        <div class="education-block">
+            <h3>서울디지털대학교</h3>
+            <span class="education-date">2012 - 2014</span>
+            <h4> 컴퓨터 소프트웨어</h4>            
+        </div>
+        <!-- End .education-block -->
+
+        <div class="education-block">
+            <h3>성남폴리텍대학</h3>
+            <span class="education-date">2000 - 2002</span>
+            <h4>컴퓨터응용기계</h4>
+        </div>
+        <!-- End .education-block -->
+    </div>
+    <!-- End #education -->
+
+    <div id="projects" class="background-alt">
+        <h2 class="heading">Projects</h2>
+        <div class="container">
+            <div class="row">
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project_01.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>SUUNTO</h3>
+                        <p>
+                            상단에 와이드한 비주얼 이미지를 전부 보여주고,<br/> 
+                            하단에 롤링 배너에 임팩트를 주어 구현 하였습니다.
+                        </p>
+                        <a href="http://jdk119.esy.es/html/1/mobile.html" target="_blank">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project_02.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>어서옥션2탄</h3>
+                        <p>
+                            혼자 즐기자 컨섭으로 각각의 방을 큐브 형태로 롤링시켜 구현 하였습니다.
+                        </p>
+                        <a href="http://jdk119.esy.es/html/2/mobile.html" target="_blank">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project_03.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>어서옥션</h3>
+                        <p>                            
+                           연속 촬영 이미지를 스크립트를 활용하여 동영상 느낌이 나도록 구현하였습니다. <br/>
+                        </p>
+                        <a href="http://jdk119.esy.es/html/3/mobile.html" target="_blank">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project_05.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>코펜하겐(웹)</h3>
+                        <p>
+                            메인 이미지 모션을 크게 주고  주변 꽃,줄기 등을 시간차를 두고 구현하였습니다.
+                        </p>
+                        <a href="http://jdk119.esy.es/html/4/desktop.html" target="_blank">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project_04.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>코펜하겐(모바일)</h3>
+                        <p>
+                            좌에 우로 나오면서 시간차를 두고 배경꽃들이 나오게 구현하였습니다.
+                        </p>
+                        <a href="http://jdk119.esy.es/html/4/mobile.html" target="_blank">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project_06.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>크리스마스</h3>
+                        <p>
+                            루돌프 이미지에 아기자기한 움직임을 주었습니다.
+                        </p>
+                        <a href="http://jdk119.esy.es/html/5/mobile.html" target="_blank">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+    <!-- End #projects -->
+
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            <li>html5</li>
+            <li>css</li>
+            <li>css3</li>
+            <li>javascript</li>         
+        </ul>
+    </div>
+    <!-- End #skills -->
+
+    <!-- <div id="contact">
+        <h2>Get in Touch</h2>
+        <div id="contact-form">
+            <form method="POST" action="https://formspree.io/email@email.com">
+                <input type="hidden" name="_subject" value="Contact request from personal website" />
+                <input type="email" name="_replyto" placeholder="Your email" required>
+                <textarea name="message" placeholder="Your message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        
+    </div> -->
+    <!-- End #contact-form -->
+    <!-- End #contact -->
+
+    <footer style="background:#f2f2f5;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; 2017 JDK
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="col-sm-5 social">
+                    <ul>
+                       
+                        <li>
+                            <a href="https://www.facebook.com/profile.php?id=100009081375828" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/oribal81" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/scripts.min.js"></script>
+</body>
+
+</html>
