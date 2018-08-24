@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>clash royale random deck</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />	
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<style>
+			*{padding:0; border:0; margin:0;}
+			#p_contents{background: url('images/bg.jpg') no-repeat center top; width:1280px; height:720px;}
+ 			#p_contents .btn{position: absolute; left: 486px; top: 589px; width: 330px; height: 65px; background-color: cadetblue; color: aliceblue; font-size: 36px;}
+			#p_contents .btn_copy{position: absolute;
+				left: 846px;
+				top: 589px;
+				width: 190px;
+				height: 65px;
+				background-color: black;
+				color: aliceblue;
+				font-size: 36px;
+				display: none
+			}
+			.card_list{    position: absolute;
+				left: 319px;
+				top: 139px;
+				width: 670px;
+			}
+			.card_list li{width:160px; float: left; list-style: none}
+			.card_list li img{width:100%; vertical-align: top}
+		</style>
+		<script type="text/javascript">
+
+
+			function Card(selector){
+				//console.log("Card 실행")
+				this.isNum = 0;
+				this.card_total = cardArr.length;//카드 유닛 총계
+				this.$mc = selector;//$(".card_list li");
+				this.list_total = this.$mc.length;//픽 카드 계수
+				this.moving();
+				//console.log("카드 총계 : " , this.card_total)
+			}
+			Card.prototype.moving = function(){
+				var self = this;
+				var limit_time = Math.floor(Math.random() * 8000) + 5000;
+				
+				
+				setTimeout(function(){
+					//랜덤초 지난후  삭제
+					//console.log(limit_time +" 초뒤 롤링타이머 삭제")
+					clearInterval(time);
+					self.complete();
+				},limit_time)
+
+				var time = setInterval(function(){;
+					//console.log(self.isNum)
+					if(self.isNum < self.card_total-1){
+						self.isNum++;
+					}else{
+						self.isNum = 0;
+					}
+					try{
+						self.$mc.find("img").attr("src" ,cardArr[self.isNum][0])	
+						self.$mc.find("img").attr("data-src" ,cardArr[self.isNum][2])	
+						
+					}catch(err){
+						//console.log("error  : " , err)
+					}
+					
+				},30)
+			}
+			Card.prototype.complete = function(){
+				
+				card_deck_id.push(cardArr[this.isNum][2])
+				card_deck_name.push(cardArr[this.isNum][0])
+				delete cardArr[this.isNum]				
+				console.log("저장된 deck id : " , card_deck_id , card_deck_name)
+				
+			};
+			
+			
+			/*$(document).ready(function(){
+				
+				var arr = ["jQuery","JavaScript","HTML","Ajax","Css"];
+				
+				var itemtoRemove = "HTML";
+				
+				arr.splice($.inArray(itemtoRemove, arr),1);
+				
+			});*/
+
+
+			
+			
+			var card_deck_id = []
+			var card_deck_name = []
+			var cardArr = []	
+			var btn_click_state = true;
+			//var json_url = "https://docs.royaleapi.com/json/popular_decks.json"
+			var json_url = "https://royaleapi.github.io/cr-api-data/json/cards.json"
+			$(document).ready(function(){
+				
+				$.getJSON(json_url, function(result){
+					$.each(result, function(i, field){					
+						cardArr.push(["icon/"+field.key+".png" , field.elixir ,field.id])
+					})
+					console.log("json : "  ,cardArr)
+					console.log("==========================================")
+					//console.log(cardArr[50][0])
+				});
+			
+			
+				//버튼
+				$(".btn").click(function(){
+					if(btn_click_state){
+						console.log("click");
+						setTimeout(function(){var card1 = new Card($(".card_list li:eq(0)"));		},1)
+						setTimeout(function(){var card2 = new Card($(".card_list li:eq(1)"));		},1200)
+						setTimeout(function(){var card3 = new Card($(".card_list li:eq(2)"));		},2400)
+						setTimeout(function(){var card4 = new Card($(".card_list li:eq(3)"));		},3600)
+						setTimeout(function(){var card5 = new Card($(".card_list li:eq(4)"));		},4800)
+						setTimeout(function(){var card6 = new Card($(".card_list li:eq(5)"));		},6000)
+						setTimeout(function(){var card7 = new Card($(".card_list li:eq(6)"));		},7200)
+						setTimeout(function(){var card8 = new Card($(".card_list li:eq(7)"));		},8400)
+						
+									
+						setTimeout(function(){$(".btn_copy").css("display" , "block")},10000)
+						btn_click_state = !btn_click_state;
+						$(".btn").html(" 리셋 ")
+					}else{
+						$(".btn_copy").css("display" , "none")
+						location.reload();
+						
+					}
+					
+				})
+				
+			
+				
+				
+				
+				var testArr = []
+				var str;
+				$(".btn_copy").click(function(){
+					if(card_deck_id.length == 8){
+						//https://link.clashroyale.com/deck/en?deck=26000004;26000005;26000032;26000042;26000046;26000050;28000008;28000009
+						$(".card_list li>img").each(function(index){
+							//console.log($(this).attr("data-src"))
+							testArr.push($(this).attr("data-src"));
+							str = testArr.join(";");	
+						})
+						window.open('https://link.clashroyale.com/deck/en?deck='+str);							
+						console.log('https://link.clashroyale.com/deck/en?deck='+str)
+					}else{
+						alert("error 카드를 다시 섞어주세요")
+					}
+				})
+
+			});
+
+		</script>	
+	</head>
+	<body>
+
+		<div id="p_wrapper">
+
+			<div id="p_contents">
+				<ul class="card_list">
+					<li><img src="icon/princess.png" alt=""></li>
+					<li><img src="icon/princess.png" alt=""></li>
+					<li><img src="icon/princess.png" alt=""></li>
+					<li><img src="icon/princess.png" alt=""></li>
+					<li><img src="icon/princess.png" alt=""></li>
+					<li><img src="icon/princess.png" alt=""></li>
+					<li><img src="icon/princess.png" alt=""></li>
+					<li><img src="icon/princess.png" alt=""></li>
+				</ul>
+				<button class="btn" type="button">랜덤생성</button>
+				<button class="btn_copy" type="button">덱복사</button>
+			</div>
+
+		</div>
+
+	</body>
+</html>
